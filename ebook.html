@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebooks</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Turn.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #1b1b1b;
+      color: #fff;
+      text-align: center;
+      user-select: none;
+    }
+
+    h1 {
+      padding: 20px;
+      color: #ffcc00;
+      font-size: 2rem;
+    }
+
+    /* Bookshelf */
+    .shelf {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      gap: 30px;
+      position: relative;
+      padding: 30px 10px;
+    }
+
+    .shelf::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(to bottom, #3e2c1b, #1f1208);
+      border-top: 5px solid #6d4c2b;
+      z-index: -1;
+    }
+
+    .book {
+      width: 140px;
+      height: 220px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .book:hover {
+      transform: translateY(-10px) scale(1.05);
+    }
+
+    .book-inner {
+      width: 100%;
+      height: 100%;
+      background: #222;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+      overflow: hidden;
+      transform: rotateY(-15deg);
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease;
+    }
+
+    .book:hover .book-inner {
+      transform: rotateY(0deg);
+    }
+
+    .book-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Viewer */
+    #viewer {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    #flipbook {
+      width: 90vw;
+      max-width: 900px;
+      height: 70vh;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    #flipbook .page {
+      width: 50%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain;
+    }
+
+    .controls {
+      margin: 15px 0;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0 5px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffcc00;
+      color: #000;
+    }
+
+    .back-btn {
+      background: #ffcc00;
+      color: #000;
+      margin: 15px 0;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .book {
+        width: 110px;
+        height: 170px;
+      }
+      #flipbook {
+        width: 100%;
+        height: 65vh;
+      }
+    }
+
+    @media(max-width: 480px) {
+      .book {
+        width: 90px;
+        height: 140px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 My eBook Library</h1>
+
+  <!-- Bookshelf -->
+  <div class="shelf" id="library">
+    <div class="book" onclick="openBook('book/Python_handbook.pdf','Book One')">
+      <div class="book-inner">
+        <img src="cover/Python.jpg" alt="Book One" class="book-cover">
+      </div>
+    </div>
+    <div class="book" onclick="openBook('book/JavaScript_Guide.pdf','Book Two')">
+      <div class="book-inner">
+        <img src="cover2.jpg" alt="Book Two" class="book-cover">
+      </div>
+    </div>
+    <div class="book" onclick="openBook('book3.pdf','Book Three')">
+      <div class="book-inner">
+        <img src="cover3.jpg" alt="Book Three" class="book-cover">
+      </div>
+    </div>
+  </div>
+
+  <!-- Flipbook Viewer -->
+  <div id="viewer">
+    <button class="btn back-btn" onclick="closeViewer()">⬅ Back to Library</button>
+    <h2 id="bookTitle"></h2>
+    <div id="flipbook"></div>
+    <div class="controls">
+      <button class="btn" onclick="$('#flipbook').turn('previous')">⬅ Prev</button>
+      <button class="btn" onclick="$('#flipbook').turn('next')">Next ➡</button>
+    </div>
+  </div>
+
+  <script>
+    function openBook(pdfUrl, title) {
+      document.getElementById("library").style.display = "none";
+      document.getElementById("viewer").style.display = "flex";
+      document.getElementById("bookTitle").textContent = title;
+
+      // Reset flipbook
+      $("#flipbook").html("");
+      if ($("#flipbook").data("turn")) {
+        $("#flipbook").turn("destroy").remove();
+        $("#viewer").prepend('<div id="flipbook"></div>');
+      }
+
+      // Init turn.js
+      $("#flipbook").turn({
+        width: $("#flipbook").width(),
+        height: $("#flipbook").height(),
+        autoCenter: true
+      });
+
+      // Load PDF pages
+      pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+          pdf.getPage(pageNum).then(function(page) {
+            const scale = 1.5;
+            const viewport = page.getViewport({ scale });
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            page.render({ canvasContext: ctx, viewport }).promise.then(() => {
+              const pageDiv = document.createElement("div");
+              pageDiv.classList.add("page");
+              pageDiv.appendChild(canvas);
+              $("#flipbook").turn("addPage", pageDiv);
+            });
+          });
+        }
+      });
+    }
+
+    function closeViewer() {
+      document.getElementById("viewer").style.display = "none";
+      document.getElementById("library").style.display = "flex";
+    }
+
+    // Disable right-click & save
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+      if (e.ctrlKey && ["s","u","p","c"].includes(e.key.toLowerCase())) e.preventDefault();
+    });
+  </script>
+
+</body>
+</html>

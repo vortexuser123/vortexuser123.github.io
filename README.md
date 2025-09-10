@@ -37,8 +37,8 @@
 
 ## 📊 GitHub Stats
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&theme=tokyonight" height="160"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=yourusername&theme=tokyonight" height="160"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=vortexuser123&show_icons=true&theme=tokyonight" height="160"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=vortexuser123&theme=tokyonight" height="160"/>
 </p>
 
 ---
@@ -54,7 +54,7 @@
 ---
 
 <p align="center"> 
-  <img src="https://komarev.com/ghpvc/?username=yourusername&label=Profile%20Views&color=00F7FF&style=flat" alt="views" /> 
+  <img src="https://komarev.com/ghpvc/?username=vortexuser123&label=Profile%20Views&color=00F7FF&style=flat" alt="views" /> 
 </p>
 
 ---

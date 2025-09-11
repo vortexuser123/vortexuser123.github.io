@@ -2,259 +2,178 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ebooks</title>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Turn.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
-  <!-- PDF.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-
+  <title>My Digital Library</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #1b1b1b;
-      color: #fff;
-      text-align: center;
-      user-select: none;
-    }
-
-    h1 {
+      margin: 0;
       padding: 20px;
-      color: #ffcc00;
-      font-size: 2rem;
+      background: url("https://www.transparenttextures.com/patterns/brick-wall.png");
+      background-color: #d9c7aa; /* fallback */
     }
-
-    /* Bookshelf */
-    .shelf {
+    h1 {
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      margin-bottom: 30px;
+    }
+    .library {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      max-width: 1200px;
-      margin: 0 auto 40px;
       gap: 30px;
+      justify-content: center;
       position: relative;
-      padding: 30px 10px;
+      margin-bottom: 80px;
     }
-
-    .shelf::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
+    .shelf {
       width: 100%;
       height: 40px;
-      background: linear-gradient(to bottom, #3e2c1b, #1f1208);
-      border-top: 5px solid #6d4c2b;
-      z-index: -1;
+      background: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+      background-size: cover;
+      border-radius: 6px;
+      margin-top: 40px;
+      position: absolute;
+      bottom: -20px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: translateY(-50px);
+      animation: dropShelf 0.6s forwards;
+    }
+    .lamp-light {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 120px;
+      background: radial-gradient(ellipse at center, rgba(255,215,130,0.7) 0%, rgba(255,215,130,0.1) 60%, transparent 100%);
+      filter: blur(20px);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: flicker 3s infinite;
+    }
+
+    /* Flicker effect */
+    @keyframes flicker {
+      0% { opacity: 0.8; }
+      10% { opacity: 0.85; }
+      20% { opacity: 0.75; }
+      30% { opacity: 0.9; }
+      40% { opacity: 0.7; }
+      50% { opacity: 0.85; }
+      60% { opacity: 0.8; }
+      70% { opacity: 0.9; }
+      80% { opacity: 0.75; }
+      90% { opacity: 0.85; }
+      100% { opacity: 0.8; }
     }
 
     .book {
-      width: 140px;
-      height: 220px;
-      perspective: 1000px;
+      width: 150px;
+      text-align: center;
       cursor: pointer;
       transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideIn 0.8s forwards;
+      display: inline-block;
+      z-index: 2;
     }
-
-    .book:hover {
-      transform: translateY(-10px) scale(1.05);
-    }
-
-    .book-inner {
+    .book img {
       width: 100%;
-      height: 100%;
-      background: #222;
       border-radius: 5px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-      overflow: hidden;
-      transform: rotateY(-15deg);
-      transform-style: preserve-3d;
-      transition: transform 0.4s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
     }
-
-    .book:hover .book-inner {
-      transform: rotateY(0deg);
-    }
-
-    .book-cover {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Viewer */
-    #viewer {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
-
-    #flipbook {
-      width: 90vw;
-      max-width: 900px;
-      height: 70vh;
-      margin: auto;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-      border-radius: 10px;
-      background: #fff;
-    }
-
-    #flipbook .page {
-      width: 50%;
-      height: 100%;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: contain;
-    }
-
-    .controls {
-      margin: 15px 0;
-    }
-
-    .btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+    .book p {
+      margin-top: 8px;
       font-size: 1rem;
-      margin: 0 5px;
-      transition: 0.3s;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    .book:hover img {
+      transform: scale(1.05);
     }
 
-    .btn:hover {
-      background: #ffcc00;
-      color: #000;
+    /* Tilt */
+    .tilt-left { transform: rotate(-3deg) translateY(30px); }
+    .tilt-right { transform: rotate(3deg) translateY(30px); }
+    .straight { transform: rotate(0deg) translateY(30px); }
+
+    /* Animations */
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotate(var(--rotate, 0));
+      }
+    }
+    @keyframes dropShelf {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .back-btn {
-      background: #ffcc00;
-      color: #000;
-      margin: 15px 0;
-    }
-
-    /* Responsive */
-    @media(max-width: 768px) {
+    /* 📱 Responsive */
+    @media (max-width: 600px) {
       .book {
-        width: 110px;
-        height: 170px;
+        width: 120px;
       }
-      #flipbook {
-        width: 100%;
-        height: 65vh;
+      .book p {
+        font-size: 0.9rem;
       }
-    }
-
-    @media(max-width: 480px) {
-      .book {
-        width: 90px;
-        height: 140px;
-      }
-      h1 {
-        font-size: 1.5rem;
+      .lamp-light {
+        width: 200px;
+        height: 80px;
       }
     }
   </style>
 </head>
 <body>
-
-  <h1>📚 My eBook Library</h1>
-
-  <!-- Bookshelf -->
-  <div class="shelf" id="library">
-    <div class="book" onclick="openBook('book/Python_handbook.pdf','Book One')">
-      <div class="book-inner">
-        <img src="cover/Python.jpg" alt="Book One" class="book-cover">
-      </div>
+  <h1>📚 My Digital Library</h1>
+  
+  <!-- Shelf 1 -->
+  <div class="library">
+    <div class="lamp-light"></div>
+    <div class="book tilt-left" style="animation-delay: 1s;" onclick="openBook('book/Python_handbook.pdf')">
+      <img src="cover/Python.jpg" alt="Book One">
+      <p></p>
     </div>
-    <div class="book" onclick="openBook('book/JavaScript_Guide.pdf','Book Two')">
-      <div class="book-inner">
-        <img src="cover2.jpg" alt="Book Two" class="book-cover">
-      </div>
+    <div class="book straight" style="animation-delay: 1.2s;" onclick="openBook('pdfs/book2.pdf')">
+      <img src="covers/cover2.jpg" alt="Book Two">
+      <p>Book Two</p>
     </div>
-    <div class="book" onclick="openBook('book3.pdf','Book Three')">
-      <div class="book-inner">
-        <img src="cover3.jpg" alt="Book Three" class="book-cover">
-      </div>
+    <div class="book tilt-right" style="animation-delay: 1.4s;" onclick="openBook('pdfs/book3.pdf')">
+      <img src="covers/cover3.jpg" alt="Book Three">
+      <p>Book Three</p>
     </div>
+    <div class="shelf" style="animation-delay: 0.4s;"></div>
   </div>
 
-  <!-- Flipbook Viewer -->
-  <div id="viewer">
-    <button class="btn back-btn" onclick="closeViewer()">⬅ Back to Library</button>
-    <h2 id="bookTitle"></h2>
-    <div id="flipbook"></div>
-    <div class="controls">
-      <button class="btn" onclick="$('#flipbook').turn('previous')">⬅ Prev</button>
-      <button class="btn" onclick="$('#flipbook').turn('next')">Next ➡</button>
+  <!-- Shelf 2 -->
+  <div class="library">
+    <div class="lamp-light"></div>
+    <div class="book straight" style="animation-delay: 2s;" onclick="openBook('pdfs/book4.pdf')">
+      <img src="covers/cover4.jpg" alt="Book Four">
+      <p>Book Four</p>
     </div>
+    <div class="book tilt-left" style="animation-delay: 2.2s;" onclick="openBook('pdfs/book5.pdf')">
+      <img src="covers/cover5.jpg" alt="Book Five">
+      <p>Book Five</p>
+    </div>
+    <div class="book tilt-right" style="animation-delay: 2.4s;" onclick="openBook('pdfs/book6.pdf')">
+      <img src="covers/cover6.jpg" alt="Book Six">
+      <p>Book Six</p>
+    </div>
+    <div class="shelf" style="animation-delay: 1.4s;"></div>
   </div>
 
   <script>
-    function openBook(pdfUrl, title) {
-      document.getElementById("library").style.display = "none";
-      document.getElementById("viewer").style.display = "flex";
-      document.getElementById("bookTitle").textContent = title;
-
-      // Reset flipbook
-      $("#flipbook").html("");
-      if ($("#flipbook").data("turn")) {
-        $("#flipbook").turn("destroy").remove();
-        $("#viewer").prepend('<div id="flipbook"></div>');
-      }
-
-      // Init turn.js
-      $("#flipbook").turn({
-        width: $("#flipbook").width(),
-        height: $("#flipbook").height(),
-        autoCenter: true
-      });
-
-      // Load PDF pages
-      pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
-        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-          pdf.getPage(pageNum).then(function(page) {
-            const scale = 1.5;
-            const viewport = page.getViewport({ scale });
-            const canvas = document.createElement("canvas");
-            const ctx = canvas.getContext("2d");
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            page.render({ canvasContext: ctx, viewport }).promise.then(() => {
-              const pageDiv = document.createElement("div");
-              pageDiv.classList.add("page");
-              pageDiv.appendChild(canvas);
-              $("#flipbook").turn("addPage", pageDiv);
-            });
-          });
-        }
-      });
+    function openBook(file) {
+      // open PDF in new tab
+      window.open(file, "_blank");
     }
-
-    function closeViewer() {
-      document.getElementById("viewer").style.display = "none";
-      document.getElementById("library").style.display = "flex";
-    }
-
-    // Disable right-click & save
-    document.addEventListener("contextmenu", e => e.preventDefault());
-    document.addEventListener("keydown", e => {
-      if (e.ctrlKey && ["s","u","p","c"].includes(e.key.toLowerCase())) e.preventDefault();
-    });
   </script>
-
 </body>
 </html>

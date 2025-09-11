@@ -19,7 +19,7 @@
 ---
 
 ## 📂 Portfolio Sections
-🔹 **[📖 eBooks](./ebooks/)** – Explore my published works  
+🔹 **[📖 eBooks](./ebook.html/)** – Explore my published works  
 🔹 **Projects:**  
    - 🎮 *Horror Adventure Game* (Indian vibe, ultra-realistic graphics)  
    - 🤖 *CybrBuddy* – AI-powered futuristic website assistant  

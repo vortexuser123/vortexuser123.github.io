@@ -1,6 +1,6 @@
 <!-- Profile Header -->
 <h1 align="center">Hey 👋, I'm Animesh</h1>
-<h3 align="center">🚀 Developer | Ethical Hacker | Filmmaker | AI/ML Enthusiast</h3>
+<h3 align="center"> Developer | Ethical Hacker | Author | AI/ML Enthusiast</h3>
 
 <!-- Typing Animation -->
 <p align="center">
@@ -13,7 +13,7 @@
 - 👨‍💻 Founder & CEO of **BitForge** | Co-founder of **FS Games**
 - 🎮 Game Developer (Unity, Godot) | Content Creator
 - 🤖 Passionate about **AI assistants, hacking, and futuristic inventions**
-- 📚 Author of *The Endless Road* | Filmmaker 🎥
+- 📚 Author of *The Endless Road* | *The Road to the mystery*
 - 🌱 Currently learning **Advanced Python, Networking, and Security**
 
 ---
@@ -38,7 +38,7 @@
 ## 📊 GitHub Stats
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=vortexuser123&show_icons=true&theme=tokyonight" height="160"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=vortexuser123&theme=tokyonight" height="160"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Animesh&theme=tokyonight" height="160"/>
 </p>
 
 ---

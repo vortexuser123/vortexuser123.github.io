@@ -2,178 +2,234 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Digital Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: url("https://www.transparenttextures.com/patterns/brick-wall.png");
-      background-color: #d9c7aa; /* fallback */
-    }
-    h1 {
-      text-align: center;
-      color: #fff;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-      margin-bottom: 30px;
-    }
-    .library {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-      position: relative;
-      margin-bottom: 80px;
-    }
-    .shelf {
-      width: 100%;
-      height: 40px;
-      background: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
-      background-size: cover;
-      border-radius: 6px;
-      margin-top: 40px;
-      position: absolute;
-      bottom: -20px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.5);
-      opacity: 0;
-      transform: translateY(-50px);
-      animation: dropShelf 0.6s forwards;
-    }
-    .lamp-light {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 300px;
-      height: 120px;
-      background: radial-gradient(ellipse at center, rgba(255,215,130,0.7) 0%, rgba(255,215,130,0.1) 60%, transparent 100%);
-      filter: blur(20px);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 1;
-      animation: flicker 3s infinite;
-    }
-
-    /* Flicker effect */
-    @keyframes flicker {
-      0% { opacity: 0.8; }
-      10% { opacity: 0.85; }
-      20% { opacity: 0.75; }
-      30% { opacity: 0.9; }
-      40% { opacity: 0.7; }
-      50% { opacity: 0.85; }
-      60% { opacity: 0.8; }
-      70% { opacity: 0.9; }
-      80% { opacity: 0.75; }
-      90% { opacity: 0.85; }
-      100% { opacity: 0.8; }
-    }
-
-    .book {
-      width: 150px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: slideIn 0.8s forwards;
-      display: inline-block;
-      z-index: 2;
-    }
-    .book img {
-      width: 100%;
-      border-radius: 5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease;
-    }
-    .book p {
-      margin-top: 8px;
-      font-size: 1rem;
-      color: #fff;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    }
-    .book:hover img {
-      transform: scale(1.05);
-    }
-
-    /* Tilt */
-    .tilt-left { transform: rotate(-3deg) translateY(30px); }
-    .tilt-right { transform: rotate(3deg) translateY(30px); }
-    .straight { transform: rotate(0deg) translateY(30px); }
-
-    /* Animations */
-    @keyframes slideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0) rotate(var(--rotate, 0));
-      }
-    }
-    @keyframes dropShelf {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* 📱 Responsive */
-    @media (max-width: 600px) {
-      .book {
-        width: 120px;
-      }
-      .book p {
-        font-size: 0.9rem;
-      }
-      .lamp-light {
-        width: 200px;
-        height: 80px;
-      }
+    .tilt:hover {
+      transform: perspective(1000px) rotateY(8deg) rotateX(4deg) scale(1.05);
+      transition: transform 0.4s ease;
     }
   </style>
 </head>
-<body>
-  <h1>📚 My Digital Library</h1>
-  
-  <!-- Shelf 1 -->
-  <div class="library">
-    <div class="lamp-light"></div>
-    <div class="book tilt-left" style="animation-delay: 1s;" onclick="openBook('book/Python_handbook.pdf')">
-      <img src="cover/Python.jpg" alt="Book One">
-      <p></p>
-    </div>
-    <div class="book straight" style="animation-delay: 1.2s;" onclick="openBook('pdfs/book2.pdf')">
-      <img src="covers/cover2.jpg" alt="Book Two">
-      <p>Book Two</p>
-    </div>
-    <div class="book tilt-right" style="animation-delay: 1.4s;" onclick="openBook('pdfs/book3.pdf')">
-      <img src="covers/cover3.jpg" alt="Book Three">
-      <p>Book Three</p>
-    </div>
-    <div class="shelf" style="animation-delay: 0.4s;"></div>
+<body class="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen p-6">
+
+  <!-- Header -->
+  <header class="text-center mb-8">
+    <h1 class="text-5xl font-extrabold text-indigo-400 drop-shadow-lg">My Ebooks</h1>
+    <!-- <p class="text-gray-300 text-lg">Preview, Download, Rate & Track Stats</p> -->
+  </header>
+
+  <!-- Controls -->
+  <div class="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
+    <input 
+      id="searchInput" 
+      type="text" 
+      placeholder="🔍 Search ebooks..." 
+      class="w-full sm:w-1/4 p-3 rounded-xl bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    >
+    <button 
+      id="addEbookBtn" 
+      class="px-5 py-3 bg-indigo-600 rounded-xl font-bold hover:bg-indigo-700 transition transform hover:scale-105">
+      ➕ Add Ebook
+    </button>
   </div>
 
-  <!-- Shelf 2 -->
-  <div class="library">
-    <div class="lamp-light"></div>
-    <div class="book straight" style="animation-delay: 2s;" onclick="openBook('pdfs/book4.pdf')">
-      <img src="covers/cover4.jpg" alt="Book Four">
-      <p>Book Four</p>
+  <!-- Stats -->
+  <div id="stats" class="flex flex-wrap gap-4 justify-center mb-8">
+    <div class="bg-gray-800 px-6 py-4 rounded-xl shadow-md">
+      <span class="text-2xl font-bold" id="totalBooks">0</span><br>
+      <span class="text-gray-400">Total Ebooks</span>
     </div>
-    <div class="book tilt-left" style="animation-delay: 2.2s;" onclick="openBook('pdfs/book5.pdf')">
-      <img src="covers/cover5.jpg" alt="Book Five">
-      <p>Book Five</p>
+    <div class="bg-gray-800 px-6 py-4 rounded-xl shadow-md">
+      <span class="text-2xl font-bold" id="avgRating">0.0</span><br>
+      <span class="text-gray-400">Avg Rating</span>
     </div>
-    <div class="book tilt-right" style="animation-delay: 2.4s;" onclick="openBook('pdfs/book6.pdf')">
-      <img src="covers/cover6.jpg" alt="Book Six">
-      <p>Book Six</p>
+    <div class="bg-gray-800 px-6 py-4 rounded-xl shadow-md">
+      <span class="text-2xl font-bold" id="downloadCount">0</span><br>
+      <span class="text-gray-400">Downloads</span>
     </div>
-    <div class="shelf" style="animation-delay: 1.4s;"></div>
+  </div>
+
+  <!-- Ebook Grid -->
+  <div id="ebookGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Example Ebook -->
+    <div class="ebook-card relative bg-gray-800 rounded-2xl shadow-lg overflow-hidden tilt cursor-pointer group" data-rating="0">
+      <img src="cover/Python.jpg" alt="Ebook Cover" class="w-full h-full object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-bold group-hover:text-indigo-400 transition">Python Handbook</h2>
+        <p class="text-sm text-gray-400">By Animesh</p>
+        <span class="bg-indigo-600 text-xs px-2 py-1 rounded">Edition 1</span>
+      </div>
+
+      <!-- Details -->
+      <div class="absolute bottom-0 left-0 right-0 bg-black/80 text-gray-200 p-4 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-64">
+        <p class="text-sm mb-2">Learn Python language from the basics and move towards the advanced. It is a beginner friendly ebook, Which covers all the essential topics.</p>
+
+        <!-- Buttons -->
+        <div class="flex gap-2">
+          <a href="book/Python_handbook.pdf" onclick="incrementDownload()" class="inline-block bg-green-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition">Download</a>
+          <button onclick="openPreview('book/Python_handbook.pdf')" class="inline-block bg-blue-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Preview</button>
+        </div>
+        
+        <!-- Rating -->
+        <div class="flex items-center mt-2 space-x-1 rating">
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview Modal -->
+  <div id="previewModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div class="bg-gray-900 p-4 rounded-2xl w-full max-w-4xl relative">
+      <button onclick="closePreview()" class="absolute top-3 right-3 bg-red-600 w-8 h-8 rounded-full">✕</button>
+      <iframe id="pdfFrame" src="" class="w-full h-[80vh] rounded-lg"></iframe>
+    </div>
+  </div>
+
+  <!-- Add Ebook Modal -->
+  <div id="modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-md">
+      <h2 class="text-2xl font-bold mb-4">➕ Add New Ebook</h2>
+      <form id="ebookForm" class="space-y-4">
+        <input type="text" id="title" placeholder="Ebook Title" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600" required>
+        <input type="text" id="author" placeholder="Author" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600" required>
+        <input type="url" id="cover" placeholder="Cover Image URL" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600" required>
+        <textarea id="desc" placeholder="Description..." class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600"></textarea>
+        <input type="url" id="download" placeholder="Download Link (PDF)" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600" required>
+        <input type="url" id="preview" placeholder="Preview Link (PDF)" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600" required>
+        <input type="text" id="tag" placeholder="Category/Tag" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600">
+        <div class="flex justify-between mt-4">
+          <button type="submit" class="bg-indigo-600 px-5 py-2 rounded-lg hover:bg-indigo-700">Save</button>
+          <button type="button" id="closeModal" class="bg-red-600 px-5 py-2 rounded-lg hover:bg-red-700">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script>
-    function openBook(file) {
-      // open PDF in new tab
-      window.open(file, "_blank");
+    // Elements
+    const modal = document.getElementById('modal');
+    const addBtn = document.getElementById('addEbookBtn');
+    const closeBtn = document.getElementById('closeModal');
+    const form = document.getElementById('ebookForm');
+    const grid = document.getElementById('ebookGrid');
+    const searchInput = document.getElementById('searchInput');
+    const stats = {
+      totalBooks: document.getElementById('totalBooks'),
+      avgRating: document.getElementById('avgRating'),
+      downloads: document.getElementById('downloadCount')
+    };
+    let totalDownloads = 0;
+
+    // Modal Logic
+    addBtn.onclick = () => modal.classList.remove('hidden');
+    closeBtn.onclick = () => modal.classList.add('hidden');
+
+    // Add Ebook
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const author = document.getElementById('author').value;
+      const cover = document.getElementById('cover').value;
+      const desc = document.getElementById('desc').value;
+      const download = document.getElementById('download').value;
+      const preview = document.getElementById('preview').value;
+      const tag = document.getElementById('tag').value;
+
+      const card = document.createElement('div');
+      card.className = "ebook-card relative bg-gray-800 rounded-2xl shadow-lg overflow-hidden tilt cursor-pointer group";
+      card.dataset.rating = "0";
+      card.innerHTML = `
+        <img src="${cover}" alt="${title}" class="w-full h-64 object-cover">
+        <div class="p-4">
+          <h2 class="text-xl font-bold group-hover:text-indigo-400 transition">${title}</h2>
+          <p class="text-sm text-gray-400">By ${author}</p>
+          <span class="bg-indigo-600 text-xs px-2 py-1 rounded">${tag}</span>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 bg-black/80 text-gray-200 p-4 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-64">
+          <p class="text-sm mb-2">${desc}</p>
+          <div class="flex gap-2">
+            <a href="${download}" target="_blank" onclick="incrementDownload()" class="inline-block bg-green-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition">⬇ Download</a>
+            <button onclick="openPreview('${preview}')" class="inline-block bg-blue-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">👁 Preview</button>
+          </div>
+          <div class="flex items-center mt-2 space-x-1 rating">
+            <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+            <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+            <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+            <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+            <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+      attachRating(card);
+      updateStats();
+      modal.classList.add('hidden');
+      form.reset();
+    };
+
+    // Search Filter
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const cards = grid.getElementsByClassName('ebook-card');
+      for (let card of cards) {
+        const title = card.querySelector('h2').innerText.toLowerCase();
+        card.style.display = title.includes(query) ? '' : 'none';
+      }
+    });
+
+    // Stats Update
+    function updateStats() {
+      const cards = grid.querySelectorAll('.ebook-card');
+      stats.totalBooks.textContent = cards.length;
+
+      let totalRating = 0;
+      cards.forEach(c => totalRating += parseInt(c.dataset.rating || 0));
+      stats.avgRating.textContent = cards.length ? (totalRating / cards.length).toFixed(1) : "0.0";
+
+      stats.downloads.textContent = totalDownloads;
     }
+
+    function incrementDownload() {
+      totalDownloads++;
+      updateStats();
+    }
+
+    // Preview Modal
+    function openPreview(pdf) {
+      document.getElementById("pdfFrame").src = pdf;
+      document.getElementById("previewModal").classList.remove("hidden");
+    }
+    function closePreview() {
+      document.getElementById("previewModal").classList.add("hidden");
+      document.getElementById("pdfFrame").src = "";
+    }
+
+    // Star Rating
+    function attachRating(card) {
+      const stars = card.querySelectorAll('.star');
+      stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+          stars.forEach((s, i) => {
+            s.classList.toggle('text-yellow-400', i <= index);
+            s.classList.toggle('text-gray-400', i > index);
+          });
+          card.dataset.rating = index + 1;
+          updateStats();
+        });
+      });
+    }
+
+    // Attach rating to initial ebook
+    document.querySelectorAll('.ebook-card').forEach(attachRating);
+    updateStats();
   </script>
+
 </body>
 </html>

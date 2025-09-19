@@ -43,11 +43,11 @@
     </div>
     <div class="bg-gray-800 px-6 py-4 rounded-xl shadow-md">
       <span class="text-2xl font-bold" id="avgRating">0.0</span><br>
-      <span class="text-gray-400">Avg Rating</span>
+      <span class="text-gray-400">Your Rating</span>
     </div>
     <div class="bg-gray-800 px-6 py-4 rounded-xl shadow-md">
       <span class="text-2xl font-bold" id="downloadCount">0</span><br>
-      <span class="text-gray-400">Downloads</span>
+      <span class="text-gray-400">Your Downloads</span>
     </div>
   </div>
 
@@ -56,19 +56,20 @@
     <!-- Example Ebook -->
     <div class="ebook-card relative bg-gray-800 rounded-2xl shadow-lg overflow-hidden tilt cursor-pointer group" data-rating="0">
       <img src="cover/Python.jpg" alt="Ebook Cover" class="w-full h-full object-cover">
-      <div class="p-4">
+      
+
+      <!-- Details -->
+      <div class="absolute bottom-0 left-0 right-0 bg-black/80 text-gray-200 p-4 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-72">
+        <div class="p-4">
         <h2 class="text-xl font-bold group-hover:text-indigo-400 transition">Python Handbook</h2>
         <p class="text-sm text-gray-400">By Animesh</p>
         <span class="bg-indigo-600 text-xs px-2 py-1 rounded">Edition 1</span>
-      </div>
-
-      <!-- Details -->
-      <div class="absolute bottom-0 left-0 right-0 bg-black/80 text-gray-200 p-4 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-64">
+        </div>
         <p class="text-sm mb-2">Learn Python language from the basics and move towards the advanced. It is a beginner friendly ebook, Which covers all the essential topics.</p>
 
         <!-- Buttons -->
         <div class="flex gap-2">
-          <a href="book/Python_handbook.pdf" onclick="incrementDownload()" class="inline-block bg-green-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition">Download</a>
+          <a href="#" onclick="incrementDownload()" class="inline-block bg-green-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition">Download</a>
           <button onclick="openPreview('book/Python_handbook.pdf')" class="inline-block bg-blue-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Preview</button>
         </div>
         
@@ -82,6 +83,65 @@
         </div>
       </div>
     </div>
+
+    <div class="ebook-card relative bg-gray-800 rounded-2xl shadow-lg overflow-hidden tilt cursor-pointer group" data-rating="0">
+      <img src="cover/The_endless_road.png" alt="Ebook Cover" class="w-full h-full object-cover">
+      
+      <!-- Details -->
+      <div class="absolute bottom-0 left-0 right-0 bg-black/80 text-gray-200 p-4 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-72">
+        <div class="p-4">
+        <h2 class="text-xl font-bold group-hover:text-indigo-400 transition">The Endless Road</h2>
+        <p class="text-sm text-gray-400">By Animesh</p>
+        <span class="bg-indigo-600 text-xs px-2 py-1 rounded">Series 1</span>
+        </div>
+        <p class="text-sm mb-2">A story of three teenagers, lost in an abandon dark forest. They are trying to escape but the horrifying things in that jungle, Stops them to do that.</p>
+
+        <!-- Buttons -->
+        <div class="flex gap-2">
+          <a href="#" onclick="incrementDownload()" class="inline-block bg-green-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition">Download</a>
+          <button onclick="openPreview('book/Theendlessroad.pdf')" class="inline-block bg-blue-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Preview</button>
+        </div>
+        
+        <!-- Rating -->
+        <div class="flex items-center mt-2 space-x-1 rating">
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="ebook-card relative bg-gray-800 rounded-2xl shadow-lg overflow-hidden tilt cursor-pointer group" data-rating="0">
+      <img src="cover/The_whispering_banyan.jpg" alt="Ebook Cover" class="w-full h-full object-cover">
+      
+      <!-- Details -->
+      <div class="absolute bottom-0 left-0 right-0 bg-black/80 text-gray-200 p-4 max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-72">
+        <div class="p-4">
+        <h2 class="text-xl font-bold group-hover:text-indigo-400 transition">The Whispering Banyan</h2>
+        <p class="text-sm text-gray-400">By Animesh</p>
+        <span class="bg-indigo-600 text-xs px-2 py-1 rounded">Short Story</span>
+        </div>
+        <p class="text-sm mb-2">A banyan tree of full mystery. It also whispers at midnight.</p>
+
+        <!-- Buttons -->
+        <div class="flex gap-2">
+          <a href="#" onclick="incrementDownload()" class="inline-block bg-green-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-700 transition">Download</a>
+          <button onclick="openPreview('book/Thewhisperingbanyan.pdf')" class="inline-block bg-blue-600 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">Preview</button>
+        </div>
+        
+        <!-- Rating -->
+        <div class="flex items-center mt-2 space-x-1 rating">
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+          <span class="star text-gray-400 cursor-pointer text-xl">★</span>
+        </div>
+      </div>
+    </div>
+    
   </div>
 
   <!-- Preview Modal -->

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websites & Clone Webs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .popup-enter {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .popup-show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 to-black min-h-screen flex flex-col">
+
+    <nav class="glass text-white p-4 flex justify-between items-center shadow-lg">
+        <h1 class="text-xl font-bold">AI Tools and Projects</h1>
+        <a href="index.html#portfolio"
+            class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg flex items-center gap-2">
+            <i data-feather="arrow-left"></i>Back
+        </a>
+    </nav>
+
+    <!-- card -->
+    <div class="flex flex-wrap gap-6 justify-center items-center flex-grow p-6">
+    
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup1">
+            <h2 class="text-xl font-bold">Smart Personal Assistant</h2>
+            <p class="text-gray-400 text-sm">An AI-powered assistant that responds to voice and text queries, answers questions, opens apps, and fetches real-time info like weather, news, and reminders.</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup2">
+            <h2 class="text-xl font-bold">Emotion-Aware Virtual Assistant</h2>
+            <p class="text-gray-400 text-sm">An assistant taht detects the user's emotion (via facial recognition) and responds empathetically</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup3">
+            <h2 class="text-xl font-bold">AI Task Manager & Scheduler</h2>
+            <p class="text-gray-400 text-sm">A personal assistant that manages tasks, set reminders, integrates with Google Calender, and organizes daily routines</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup4">
+            <h2 class="text-xl font-bold">Virtual Study Assistant</h2>
+            <p class="text-gray-400 text-sm">Helps students with summaries, explanations, Q&A sessions, flashcards, and motivational reminders</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup5">
+            <h2 class="text-xl font-bold">Healthcare Virtual Assistant</h2>
+            <p class="text-gray-400 text-sm">An AI bot that provides medical information, tracks symptoms, and reminds users to take medicines</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup6">
+            <h2 class="text-xl font-bold">Shopping Assistant</h2>
+            <p class="text-gray-400 text-sm">Helps customers find the best products, compare prices, and track orders in an online store</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup7">
+            <h2 class="text-xl font-bold">AI-powered Car Assistant</h2>
+            <p class="text-gray-400 text-sm">A virtual assistant inside a car that gives driving instructions, play music, and detects driver fatigue</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup8">
+            <h2 class="text-xl font-bold">Multilingual AI Assistant</h2>
+            <p class="text-gray-400 text-sm">Speaks and understands multiple languages for global usability</p>
+        </div>
+
+        <div class="bg-gray-800/50 text-white rounded-xl shadow-lg p-6 w-64 cursor-pointer hover:bg-gray-700/50 transition card"
+            data-menu="popup9">
+            <h2 class="text-xl font-bold">AI Assistant with UI</h2>
+            <p class="text-gray-400 text-sm">A futuristic assistant with a 3D/2D animated face that shows emotions while speaking</p>
+        </div>
+    </div>
+
+
+    <!-- Popup menu -->
+    <div id="popup1" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/smartprsnl_assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/smartprsnl_assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup1')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup2" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/emotionaware_assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/emotionaware_assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup2')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup3" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/aitaskmanager_scheduler')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/aitaskmanager_scheduler/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup3')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup4" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/virtualstudy_assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/virtualstudy_assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup4')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup5" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/healthcare_assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/healthcare_assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup5')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup6" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/shopping_assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/shopping_assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup6')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup7" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/aipoweredcar_assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/aipoweredcar_assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup7')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup8" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/multilingual_assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/multilingual_assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup8')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="popup9" class="popup-enter hidden fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+        <div class="glass p-6 rounded-2xl shadow-xl w-80 text-white">
+            <h3 class="text-lg font-bold mb-4">⚠ Choose an option</h3>
+            <div class="flex flex-col gap-3">
+                <button onclick="openFile('https://github.com/vortexuser123/AI-assistant')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="archive"></i> Get Source Code
+                </button>
+                <button onclick="openFile('https://vortexuser123.github.io/AI-assistant/')" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10">
+                    <i data-feather="link"></i> Open Project
+                </button>
+            </div>
+            <button onclick="closePopup('popup9')" class="mt-6 w-full bg-red-500 hover:bg-red-600 p-3 rounded-lg text-white font-bold">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll(".card").forEach(card => {
+            card.addEventListener("click", () => {
+                const menuId = card.getAttribute("data-menu");
+                openPopup(menuId);
+            });
+        });
+
+        function openPopup(id) {
+            const popup = document.getElementById(id);
+            popup.classList.remove("hidden");
+            setTimeout(() => popup.classList.add("popup-show"), 10);
+        }
+
+        function closePopup(id) {
+            const popup = document.getElementById(id);
+            popup.classList.remove("popup-show");
+            setTimeout(() => popup.classList.add("hidden"), 250);
+        }
+
+        function openFile(url) {
+            window.open(url, "_blank");
+        }
+
+        feather.replace()
+    </script>
+
+</body>
+
+</html>

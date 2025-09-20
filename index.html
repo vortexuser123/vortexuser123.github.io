@@ -489,8 +489,8 @@
   .ebook-btn {
     display: inline-block;
     padding: 12px 25px;
-    background: #ffcc00;
-    color: #000;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    color: #ddd4d4;
     font-weight: bold;
     border-radius: 8px;
     text-decoration: none;
@@ -500,7 +500,7 @@
   }
 
   .ebook-btn:hover {
-    background: #ffaa00;
+    background: linear-gradient(180deg, rgba(0, 11, 17, 0.534), rgba(1, 10, 49, 0.493));
     transform: scale(1.05);
     box-shadow: 0 6px 15px rgba(0,0,0,0.6);
   }
@@ -791,11 +791,11 @@
 
         <div class="cta">
           <a href="resume.PDF" target="_blank" class="btn" id="hireBtn">Download Resume</a>
-          <a href="#portfolio" class="ghost">See My Projects</a>
+          <a href="#portfolio" class="ghost">See My Works</a>
         </div>
 
         <div class="meta">
-          <a class="phone" href="tel:+919851325335">C O N T A C T</a>
+          <a class="phone" href="mailto:singhaanimesh509@gmail.com">C O N T A C T</a>
           <div class="socials" aria-label="Social links">
             <a href="https://www.instagram.com/__ani_uniriuner__/" target="_blank" title="Instagram"
               rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
@@ -807,11 +807,6 @@
         </div>
       </div>
 
-      <!-- <div class="photoWrap" aria-hidden="false">
-        <img src="mainImg.jpg" alt="Animesh Singha - Web Developer" class="avatar" id="profileImg">
-      </div> -->
-
-      
       <!-- Flip Card -->
       <div class="img" onclick="this.classList.toggle('clicked')">
         <div class="img-inner">
@@ -835,8 +830,8 @@
           <button onclick="checkPassword()">Submit</button>
           <div id="status"></div>
           <div class="terminal" id="terminal">
-            <p>> Welcome Owner...</p>
-            <p>> Enter pf Code:</p>
+            <p>> welcome Owner...</p>
+            <p>> enter passcode:</p>
             <input type="text" id="secretCode" onkeypress="checkCode(event)">
           </div>
         </div>
@@ -853,7 +848,7 @@
       <div class="about-grid">
         <div class="about-card">
           <h3 style="margin-top:0">Who I am</h3>
-          <p style="color:var(--muted)">I’m Animesh — Founder of <strong>BitForge</strong>, a tech-driven company
+          <p style="color:var(--muted)">I’m Animesh — Founder of <strong>BitForge</strong>, a tech-driven startup
             focused on delivering innovative, secure, and impactful digital solutions. With expertise as both a
             developer and an ethical hacker, I bridge creativity with security to build products that are not only
             functional but also resilient against modern cyber threats. My approach blends problem-solving, strategic
@@ -875,6 +870,8 @@
             just what you ask for, but what your future needs.</p>
           <p style="margin-top:10px; color:var(--muted)"><strong>Availability:</strong> Projects, freelance work, and
             collaborations.</p>
+          <a href="ebook.html" target="_blank" class="ebook-btn">eBooks</a>
+          <a href="songs.html" target="_blank" class="ebook-btn">Songs</a>
         </div>
       </div>
     </div>
@@ -924,7 +921,6 @@
               digital product</li>
           </ul>
         </div>
-<!--         <a href="ebook.html" target="_blank" class="ebook-btn">My eBooks</a> -->
       </div>
     </div>
   </section>
@@ -972,6 +968,38 @@
               ➡</a>
           </div>
         </div>
+        <!-- Project 4 -->
+        <div class="proj" tabindex="0" role="button" aria-pressed="false" onclick="openProject(4)">
+          <img src="c.jpg" alt="Project 3 screenshot">
+          <div class="meta">
+            <h4 style="margin:6px 0">Websites & Clone Webs</h4>
+            <p style="color:var(--muted); margin:0">A collective of original sites and clones, built to showcase design, functionality, and my growing web development skills</p>
+            <a href="projects4.html" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">View Project
+              ➡</a>
+          </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="proj" tabindex="0" role="button" aria-pressed="false" onclick="openProject(5)">
+          <img src="b.jpg" alt="Project 3 screenshot">
+          <div class="meta">
+            <h4 style="margin:6px 0">Games</h4>
+            <p style="color:var(--muted); margin:0">A collective of games I've created, mixing code, design, and imagination into dun experiences.</p>
+            <a href="projects5.html" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">View Project
+              ➡</a>
+          </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="proj" tabindex="0" role="button" aria-pressed="false" onclick="openProject(6)">
+          <img src="a.jpg" alt="Project 3 screenshot">
+          <div class="meta">
+            <h4 style="margin:6px 0">AI Virtual Assistant - CyBuddy</h4>
+            <p style="color:var(--muted); margin:0">An intelligent, in-house AI assistant for websites that guides
+              users, answers queries, and automates tasks -- Built without third-party APIs for complete control and
+              customization</p>
+            <a href="projects6.html" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg">View Project
+              ➡</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1008,7 +1036,7 @@
           <input required type="email" id="cemail" name="email"
             style="width:100%; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:#070708; color:#e9f0f4; margin-bottom:12px;">
           <label style="display:block; color:var(--muted); margin-bottom:8px;">Prompt Space</label>
-          <textarea required id="cmsg" rows="6"
+          <textarea id="cmsg" rows="6"
             style="width:100%; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:#070708; color:#e9f0f4; margin-bottom:12px;"></textarea>
           <button type="submit"
             style="background:var(--neon1); color:#000; padding:12px 16px; border-radius:10px; font-weight:700; border:none; cursor:pointer;">Send
@@ -1170,7 +1198,7 @@
       const pass = document.getElementById("password").value;
       const status = document.getElementById("status");
 
-      if (pass === "ani#4050pmg") {
+      if (pass === "a&i010gen") { 
         status.innerHTML = '<div class="tick"></div>';
         setTimeout(() => {
           document.getElementById("terminal").style.display = "block";
@@ -1185,7 +1213,7 @@
     function checkCode(e) {
       if (e.key === "Enter") {
         const code = document.getElementById("secretCode").value;
-        if (code === "1403") {
+        if (code === "14031912") {
           window.open("private.html", "_blank"); // <-- Change link here
         } else {
           alert("Wrong Code!");
@@ -1210,6 +1238,7 @@
 
 
 </html>
+
 
 
 

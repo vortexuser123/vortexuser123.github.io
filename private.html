@@ -526,118 +526,6 @@
 
 </html>
 
-
-      let projects = JSON.parse(localStorage.getItem("projects")) || [];
-      projects.push(project);
-      localStorage.setItem("projects", JSON.stringify(projects));
-
-      renderProjects();
-      closeProjectForm();
-    }
-  }
-
-  function updateProject() {
-    const title = document.getElementById("projectTitle").value;
-    const link = document.getElementById("projectLink").value;
-
-    if (title && link && editIndex !== null) {
-      let projects = JSON.parse(localStorage.getItem("projects")) || [];
-      projects[editIndex] = { title, link };
-      localStorage.setItem("projects", JSON.stringify(projects));
-
-      renderProjects();
-      closeProjectForm();
-    }
-  }
-
-  function deleteProject(index) {
-    let projects = JSON.parse(localStorage.getItem("projects")) || [];
-    projects.splice(index, 1);
-    localStorage.setItem("projects", JSON.stringify(projects));
-    renderProjects();
-  }
-
-  function renderProjects() {
-    const list = document.getElementById("projectList");
-    list.innerHTML = "";
-
-    let projects = JSON.parse(localStorage.getItem("projects")) || [];
-    projects.forEach((project, index) => {
-      const li = document.createElement("li");
-      li.classList.add("flex", "items-center", "justify-between", "bg-gray-800", "rounded-lg", "px-4", "py-2", "hover:bg-purple-600", "transition", "cursor-move");
-      li.setAttribute("draggable", "true");
-      li.setAttribute("data-index", index);
-
-      li.innerHTML = `
-        <a href="${project.link}" target="_blank" class="flex-1">
-          ${project.title}
-        </a>
-        <div class="flex space-x-2">
-          <button onclick="openProjectForm(true, ${index})" 
-                  class="text-blue-400 hover:text-blue-600">✏️</button>
-          <button onclick="deleteProject(${index})" 
-                  class="text-red-400 hover:text-red-600">❌</button>
-        </div>
-      `;
-
-      // Drag Events
-      li.addEventListener("dragstart", (e) => {
-        dragSrcIndex = index;
-        e.dataTransfer.effectAllowed = "move";
-      });
-
-      li.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        li.classList.add("bg-purple-700");
-      });
-
-      li.addEventListener("dragleave", () => {
-        li.classList.remove("bg-purple-700");
-      });
-
-      li.addEventListener("drop", () => {
-        li.classList.remove("bg-purple-700");
-        handleDrop(index);
-      });
-
-      list.appendChild(li);
-    });
-  }
-
-  function handleDrop(dropIndex) {
-    let projects = JSON.parse(localStorage.getItem("projects")) || [];
-
-    if (dragSrcIndex !== null && dragSrcIndex !== dropIndex) {
-      const dragged = projects[dragSrcIndex];
-      projects.splice(dragSrcIndex, 1); 
-      projects.splice(dropIndex, 0, dragged); 
-
-      localStorage.setItem("projects", JSON.stringify(projects));
-      renderProjects();
-    }
-  }
-
-  function loadProjects() {
-    renderProjects();
-  }
-</script>
-
-      <!-- Stats Tab -->
-      <div class="bg-gray-900 bg-opacity-70 p-6 rounded-xl shadow-lg">
-        <h2 class="text-2xl font-semibold mb-4">📊 My Stats</h2>
-        <div class="space-y-4 text-center">
-          <!-- Example GitHub Stats -->
-          <img src="https://github-readme-stats.vercel.app/api?username=vortexuser123&show_icons=true&theme=radical" 
-               alt="GitHub Stats" class="rounded-lg shadow-md mx-auto">
-          <img src="https://github-readme-streak-stats.herokuapp.com/?user=Animesh&theme=radical" 
-               alt="GitHub Streak" class="rounded-lg shadow-md mx-auto">
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Particles Config -->
   <script>
     particlesJS("particles-js", {
       "particles": {
@@ -652,5 +540,6 @@
 
 </body>
 </html>
+
 
 

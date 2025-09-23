@@ -1,144 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Songs</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  .animate-fadeIn { animation: fadeIn 0.5s ease-in-out; }
-  @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
-  .slide-up { transition: transform 0.4s ease; transform: translateY(0); }
-  .scale-90 { transform: scale(0.9); }
-  .scale-100 { transform: scale(1); }
-  .opacity-0 { opacity: 0; }
-  .opacity-100 { opacity: 1; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-up {
+      transition: transform 0.4s ease;
+      transform: translateY(0);
+    }
+
+    .scale-90 {
+      transform: scale(0.9);
+    }
+
+    .scale-100 {
+      transform: scale(1);
+    }
+
+    .opacity-0 {
+      opacity: 0;
+    }
+
+    .opacity-100 {
+      opacity: 1;
+    }
+  </style>
 </head>
+
 <body class="bg-gray-900 text-white min-h-screen flex flex-col items-center pb-40">
 
-<!-- Header -->
-<header class="w-full bg-gradient-to-r from-purple-900 via-pink-800 to-red-700 py-6 shadow-lg mb-6">
-  <h1 class="text-4xl font-bold text-center">Listen Music...</h1>
-</header>
+  <!-- Header -->
+  <header class="w-full bg-gradient-to-r from-purple-900 via-pink-800 to-red-700 py-6 shadow-lg mb-6">
+    <h1 class="text-4xl font-bold text-center">Listen Music...</h1>
+  </header>
 
-<!-- Spotify Section -->
-<section id="spotifySection" class="w-full max-w-4xl px-6 mb-12">
-  <h2 class="text-2xl font-semibold mb-4">Spotify Playlist</h2>
-  <iframe style="border-radius:12px"
-    src="https://open.spotify.com/embed/playlist/25esPpj621tm6IzHBVBIzi?utm_source=generator"
-    width="100%" height="380" frameborder="0"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy"></iframe>
-</section>
+  <!-- Spotify Section -->
+  <section id="spotifySection" class="w-full max-w-4xl px-6 mb-12">
+    <h2 class="text-2xl font-semibold mb-4">My Spotify Playlist</h2>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/25esPpj621tm6IzHBVBIzi?utm_source=generator" width="100%"
+      height="380" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
+  </section>
 
-<!-- My Songs Section -->
-<section id="songsSection" class="w-full max-w-6xl px-6 mb-6">
-  <h2 class="text-2xl font-semibold mb-4">My Songs</h2>
-  <div id="songGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-</section>
+  <!-- My Songs Section -->
+  <section id="songsSection" class="w-full max-w-6xl px-6 mb-6">
+    <h2 class="text-2xl font-semibold mb-4">Fav Songs</h2>
+    <div id="songGrid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </section>
 
-<!-- Modal for Song Details -->
-<div id="songModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-  <div class="bg-gray-800 p-6 rounded-2xl shadow-xl w-96 relative animate-fadeIn scale-90 opacity-0">
-    <button onclick="closeModal()" class="absolute top-3 right-4 text-2xl text-white hover:text-green-400">&times;</button>
-    <div id="modalContent">
-      <img id="modalCover" src="" alt="Cover" class="w-full rounded-xl mb-4 shadow-lg">
-      <h2 id="modalTitle" class="text-xl font-bold mb-2 text-center"></h2>
-      <audio id="modalAudio" controls class="w-full">
-        <source src="" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
+  <!-- Modal for Song Details -->
+  <div id="songModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl w-96 relative animate-fadeIn scale-90 opacity-0">
+      <button onclick="closeModal()"
+        class="absolute top-5 right-7 text-2xl text-white hover:text-green-400">&times;</button>
+      <div id="modalContent">
+        <img id="modalCover" src="" alt="Cover" class="w-full h-64 object-cover rounded-xl mb-4 shadow-lg">
+        <h2 id="modalTitle" class="text-xl font-bold mb-2 text-center"></h2>
+        <audio id="modalAudio" controls autoplay class="w-full">
+          <source src="" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-// -------------------------------
-// Initial Songs Data
-// -------------------------------
-let songs = [
-  {title:"Paro by Arya", file:"songs/song1.mp3", cover:"songs/arya1.jpg", favorite:true, type:"local"},
-  {title:"Sample Song 2", file:"songs/song2.mp3", cover:"songs/arya2.jpg", favorite:false, type:"local"}
-];
+  <script>
+    // Initial Songs Data
+    let songs = [
+      { title: "Paro by Arya", file: "songs/song1.mp3", cover: "songs/arya1.jpg", favorite: true, type: "local" },
+      { title: "Sample Song 2", file: "songs/song2.mp3", cover: "songs/arya2.jpg", favorite: false, type: "local" },
+      { title: "Sample Song 3", file: "songs/song3.mp3", cover: "songs/arya3.jpg", favorite: false, type: "local" },
+      { title: "Sample Song 4", file: "songs/song4.mp3", cover: "songs/arya4.jpg", favorite: false, type: "local" },
+    ];
 
-const songGrid = document.getElementById('songGrid');
-const songModal = document.getElementById('songModal');
-const modalCover = document.getElementById('modalCover');
-const modalTitle = document.getElementById('modalTitle');
-const modalAudio = document.getElementById('modalAudio');
-let currentSongIndex = null;
+    const songGrid = document.getElementById('songGrid');
+    const songModal = document.getElementById('songModal');
+    const modalCover = document.getElementById('modalCover');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalAudio = document.getElementById('modalAudio');
+    let currentSongIndex = null;
 
-// -------------------------------
-// Render Songs
-// -------------------------------
-function renderSongs(){
-  songGrid.innerHTML = '';
-  songs.forEach((song,index)=>{
-    const card = document.createElement('div');
-    card.className = "bg-gray-800 rounded-2xl shadow-md p-4 flex flex-col items-center relative cursor-pointer animate-fadeIn";
-    card.innerHTML = `
+    // Render Songs
+    function renderSongs() {
+      songGrid.innerHTML = '';
+      songs.forEach((song, index) => {
+        const card = document.createElement('div');
+        card.className = "bg-gray-800 rounded-2xl shadow-md p-4 flex flex-col items-center relative cursor-pointer animate-fadeIn";
+        card.innerHTML = `
       <img src="${song.cover}" class="w-full h-48 object-cover rounded-lg mb-3">
       <h3 class="text-lg font-semibold truncate">${song.title}</h3>
-      <button onclick="toggleFavorite(${index})" class="absolute top-3 right-3 text-2xl ${song.favorite ? 'text-yellow-400':'text-gray-400'} hover:text-yellow-400 transition">★</button>
+      <button onclick="toggleFavorite(${index})" class="absolute top-3 right-5 text-2xl ${song.favorite ? 'text-yellow-400' : 'text-gray-600'} hover:text-yellow-400 transition">★</button>
     `;
-    card.addEventListener('click',()=> playSong(index));
-    songGrid.appendChild(card);
-  });
-}
+        card.addEventListener('click', () => playSong(index));
+        songGrid.appendChild(card);
+      });
+    }
 
-// -------------------------------
-// Toggle Favorite
-// -------------------------------
-function toggleFavorite(index){
-  songs[index].favorite = !songs[index].favorite;
-  renderSongs();
-}
+    // Toggle Favorite
+    function toggleFavorite(index) {
+      songs[index].favorite = !songs[index].favorite;
+      renderSongs();
+    }
 
-// -------------------------------
-// Play Song
-// -------------------------------
-function playSong(index){
-  const song = songs[index];
-  currentSongIndex = index;
-  modalAudio.src = song.file;
-  modalCover.src = song.cover;
-  modalTitle.textContent = song.title;
-  modalAudio.play();
-  openModalAnimation();
-}
+    // Play Song
+    function playSong(index) {
+      const song = songs[index];
+      currentSongIndex = index;
+      modalAudio.src = song.file;
+      modalCover.src = song.cover;
+      modalTitle.textContent = song.title;
+      modalAudio.play();
+      openModalAnimation();
+    }
 
-// -------------------------------
-// Modal Animations
-// -------------------------------
-function openModalAnimation(){
-  songModal.classList.remove('hidden');
-  songModal.classList.add('flex');
-  const modalContent = songModal.querySelector('div');
-  modalContent.classList.remove('scale-90','opacity-0');
-  modalContent.classList.add('scale-100','opacity-100','transition-transform','duration-300');
-}
-function closeModal(){
-  if(modalAudio.src) modalAudio.pause();
-  currentSongIndex=null;
-  const modalContent = songModal.querySelector('div');
-  modalContent.classList.remove('scale-100','opacity-100');
-  modalContent.classList.add('scale-90','opacity-0');
-  setTimeout(()=> songModal.classList.add('hidden'),300);
-}
+    // Modal Animations
+    function openModalAnimation() {
+      songModal.classList.remove('hidden');
+      songModal.classList.add('flex');
+      const modalContent = songModal.querySelector('div');
+      modalContent.classList.remove('scale-90', 'opacity-0');
+      modalContent.classList.add('scale-100', 'opacity-100', 'transition-transform', 'duration-300');
+    }
+    function closeModal() {
+      if (modalAudio.src) modalAudio.pause();
+      currentSongIndex = null;
+      const modalContent = songModal.querySelector('div');
+      modalContent.classList.remove('scale-100', 'opacity-100');
+      modalContent.classList.add('scale-90', 'opacity-0');
+      setTimeout(() => songModal.classList.add('hidden'), 300);
+    }
 
-// -------------------------------
-// Keyboard Shortcut for Play/Pause
-// -------------------------------
-window.addEventListener('keydown',(e)=>{
-  if(currentSongIndex===null) return;
-  if(e.code==='Space'){ e.preventDefault(); if(modalAudio.paused) modalAudio.play(); else modalAudio.pause(); }
-});
+    // Keyboard Shortcut for Play/Pause
+    window.addEventListener('keydown', (e) => {
+      if (currentSongIndex === null) return;
+      if (e.code === 'Space') { e.preventDefault(); if (modalAudio.paused) modalAudio.play(); else modalAudio.pause(); }
+    });
 
-// -------------------------------
-// Initialize
-// -------------------------------
-window.onload = renderSongs;
-</script>
+    // Initialize
+    window.onload = renderSongs;
+  </script>
 </body>
+
 </html>

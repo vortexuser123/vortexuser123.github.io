@@ -71,7 +71,7 @@
   <div id="songModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
     <div class="bg-gray-800 p-6 rounded-2xl shadow-xl w-96 relative animate-fadeIn scale-90 opacity-0">
       <button onclick="closeModal()"
-        class="absolute top-5 right-7 text-2xl text-white hover:text-green-400">&times;</button>
+        class="absolute top-5 right-7 text-2xl text-black hover:text-white-400">&times;</button>
       <div id="modalContent">
         <img id="modalCover" src="" alt="Cover" class="w-full h-64 object-cover rounded-xl mb-4 shadow-lg">
         <h2 id="modalTitle" class="text-xl font-bold mb-2 text-center"></h2>
@@ -86,10 +86,10 @@
   <script>
     // Initial Songs Data
     let songs = [
-      { title: "Sahiba by Arya", file: "songs/Sahiba.m4a", cover: "songs/arya1.jpg", favorite: true, type: "local" },
-      { title: "Hona tha pyaar by Aru", file: "songs/Honathapyr.m4a", cover: "songs/arya2.jpg", favorite: false, type: "local" },
-      { title: "Ishq wala love by Aru", file: "songs/Ishqwalalove.m4a", cover: "songs/arya3.jpg", favorite: false, type: "local" },
-      { title: "Aj se teri by Aru", file: "songs/Ajseteri.m4a", cover: "songs/arya4.jpg", favorite: false, type: "local" },
+      { title: "SAHIBA by Aru", file: "songs/Sahiba.m4a", cover: "songs/arya1.jpg", favorite: true, type: "local" },
+      { title: "HONA THA PYAAR by Arya", file: "songs/Honathapyr.m4a", cover: "songs/arya2.jpg", favorite: false, type: "local" },
+      { title: "ISHQ WALA LOVE by Arya", file: "songs/Ishqwalalove.m4a", cover: "songs/arya3.jpg", favorite: false, type: "local" },
+      { title: "AJ SE TERI by Arya", file: "songs/Ajseteri.m4a", cover: "songs/arya4.jpg", favorite: false, type: "local" },
     ];
 
     const songGrid = document.getElementById('songGrid');
